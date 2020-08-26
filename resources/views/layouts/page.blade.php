@@ -7,7 +7,9 @@
 
         <div class="main">
             @include('layouts.navbar')
-            @yield('page-content')
+            <main class="content">
+                @yield('page-content')
+            </main>
             @include('layouts.footer')
         </div>
     </div>

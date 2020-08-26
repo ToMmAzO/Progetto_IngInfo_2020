@@ -38,4 +38,22 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function login(Request $request)
+    {
+        $input = $request->all();
+
+        $this->validate($request, [
+            'personcode' => 'required|numeric',
+            'password' => 'required',
+        ]);
+
+        if (auth()->attempt(array('codPersona' => $input['personcode'], 'password' => $input['password']))) {
+            return redirect()->route('home');
+        } else {
+            return redirect()->route('login')
+                ->withErrors(['personcode' => 'The personcode is     not valid.']);
+        }
+
+    }
 }

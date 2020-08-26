@@ -22,17 +22,16 @@
                                         @csrf
 
                                         <div class="form-group">
-                                            <label for="email">Email</label>
+                                            <label for="personcode">Email</label>
                                             <input
-                                                class="form-control form-control-lg @error('email') is-invalid @enderror"
-                                                id="email"
-                                                type="email"
-                                                name="email"
-                                                value="{{ old('email') }}" required
-                                                autocomplete="email" autofocus
-                                                placeholder="Enter your email">
+                                                class="form-control form-control-lg @error('personcode') is-invalid @enderror"
+                                                id="personcode"
+                                                type="text"
+                                                name="personcode"
+                                                value="{{ old('personcode') }}" required autofocus
+                                                placeholder="Enter your person code">
 
-                                            @error('email')
+                                            @error('personcode')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -46,7 +45,7 @@
                                                 type="password"
                                                 name="password"
                                                 placeholder="Enter your password"
-                                                required autocomplete="current-password">
+                                                required>
                                             @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
