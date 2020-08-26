@@ -19,8 +19,6 @@ class CreateWeatherStationTable extends Migration
             $table->string('name');
             $table->integer('altitude');
             $table->string('owner');
-
-            $table->primary('weather_station_id');
         });
     }
 

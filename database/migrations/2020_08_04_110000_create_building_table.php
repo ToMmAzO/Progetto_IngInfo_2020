@@ -15,13 +15,12 @@ class CreateBuildingTable extends Migration
     {
         Schema::create('building', function (Blueprint $table) {
             $table->bigIncrements('building_id');
-            $table->bigIncrements('weather_station_id');
+            $table->unsignedBigInteger('weather_station_id');
             $table->integer('floors_number');
             $table->integer('rooms_number');
             $table->string('address');
             $table->integer('construction_year');
 
-            $table->primary('building_id');
             $table->foreign('weather_station_id')->references('weather_station_id')->on('weather_station');
         });
     }

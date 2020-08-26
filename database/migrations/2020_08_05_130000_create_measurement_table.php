@@ -14,7 +14,7 @@ class CreateMeasurementTable extends Migration
     public function up()
     {
         Schema::create('measurement', function (Blueprint $table) {
-            $table->bigIncrements('sensor_id');
+            $table->unsignedBigInteger('sensor_id');
             $table->timestamp('time');
             $table->integer('value');
 

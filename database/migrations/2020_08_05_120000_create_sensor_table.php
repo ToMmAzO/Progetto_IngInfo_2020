@@ -15,11 +15,10 @@ class CreateSensorTable extends Migration
     {
         Schema::create('sensor', function (Blueprint $table) {
             $table->bigIncrements('sensor_id');
-            $table->bigIncrements('board_id');
+            $table->unsignedBigInteger('board_id');
             $table->string('brand');
             $table->string('model');
 
-            $table->primary('sensor_id');
             $table->foreign('board_id')->references('board_id')->on('board');
         });
     }

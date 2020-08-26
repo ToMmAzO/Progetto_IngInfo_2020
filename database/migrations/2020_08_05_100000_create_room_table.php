@@ -15,7 +15,7 @@ class CreateRoomTable extends Migration
     {
         Schema::create('room', function (Blueprint $table) {
             $table->bigIncrements('room_id');
-            $table->bigIncrements('building_id');
+            $table->unsignedBigInteger('building_id');
             $table->string('intended_usage');
             $table->string('main_orientation');
             $table->string('location');
@@ -31,7 +31,6 @@ class CreateRoomTable extends Migration
             $table->integer('latitude');
             $table->integer('longitude');
 
-            $table->primary('room_id');
             $table->foreign('building_id')->references('building_id')->on('building');
         });
     }
