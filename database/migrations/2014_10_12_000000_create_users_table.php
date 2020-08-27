@@ -14,12 +14,15 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
+            $table->bigIncrements('users_id');
             $table->string('codPersona')->unique();
-            $table->string('email');
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('name');
+            $table->string('surname');
+            $table->timestamp('birthday');
+            $table->string('email');
+            //$table->timestamp('email_verified_at')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });
@@ -27,8 +30,17 @@ class CreateUsersTable extends Migration
         DB::table('users')->insert([
             'codPersona' => '10605041',
             'password' => Hash::make('segretissima'),
-            'email'=>'marco20.riva@mail.polimi.it',
-            'name' => 'Vuoi una castagna'
+            'name' => 'Marco',
+            'surname' => 'Riva',
+            'email'=>'marco20.riva@mail.polimi.it'
+        ]);
+
+        DB::table('users')->insert([
+            'codPersona' => '10572283',
+            'password' => Hash::make('password'),
+            'name' => 'Tommaso',
+            'surname' => 'Pozzi',
+            'email'=>'tommaso4.pozzi@mail.polimi.it'
         ]);
     }
 

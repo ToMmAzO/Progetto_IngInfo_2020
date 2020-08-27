@@ -19,8 +19,8 @@ class CreateRoomTable extends Migration
             $table->string('intended_usage');
             $table->string('main_orientation');
             $table->string('location');
-            $table->double('width');
             $table->double('length');
+            $table->double('width');
             $table->double('height');
             $table->integer('area');
             $table->integer('volume');
