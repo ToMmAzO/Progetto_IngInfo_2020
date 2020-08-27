@@ -14,10 +14,8 @@
                     <span class="text-dark">{{ Auth::user()->name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#"><i class="align-middle mr-1"
-                                                                           data-feather="settings"></i> Settings</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ url('/logout') }}">Logout</a>
+                    <a class="dropdown-item" href="{{ url('/logout') }}"><i class="align-middle mr-1"
+                                                                            data-feather="log-out"></i> Logout</a>
                 </div>
             </li>
         </ul>

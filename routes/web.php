@@ -10,3 +10,5 @@ Route::redirect('/index', '/');
 Route::redirect('/index.{ext}', '/');
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/rooms', 'RoomsController@index')->name('rooms');
+
