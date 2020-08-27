@@ -17,7 +17,7 @@ class CreateUsersRoomTable extends Migration
             $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('room_id');
 
-            $table->foreign('users_id')->references('users_id')->on('users');
+            $table->foreign('users_id')->references('id')->on('users');
             $table->foreign('room_id')->references('room_id')->on('room');
         });
     }
