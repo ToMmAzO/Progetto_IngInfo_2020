@@ -12,27 +12,24 @@
     </div>
 
     <div class="row">
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title mb-4">Building 1</h5>
-                    <h1 class="display-5 mt-1 mb-3">Room 4</h1>
-                    <div class="mb-1">
-                        <span class="text-muted">Ufficio</span>
+        @if (count($rooms) === 0)
+            <div class="col-sm-12">
+                No rooms
+            </div>
+        @else
+            @foreach($rooms as $r)
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Building {{$r -> building_id}}</h5>
+                            <h1 class="display-5 mt-1 mb-3"><a
+                                    href="{{ url('/room/' . $r -> room_id) }}">Room {{$r -> room_id}}</a></h1>
+                            <div class="mb-1">
+                                <span class="text-muted">{{$r -> intended_usage}}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title mb-4">Building 4</h5>
-                    <h1 class="display-5 mt-1 mb-3">Room 6</h1>
-                    <div class="mb-1">
-                        <span class="text-muted">Corridoio</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @endforeach
+    @endif
 @endsection

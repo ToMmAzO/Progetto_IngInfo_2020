@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $rooms = DB::table('users_room')
+            ->join('room', 'room.room_id', '=', 'users_room.room_id')
+            ->where('users_room.users_id', Auth::id())
+            ->get();
+        return view('home', ['rooms' => $rooms]);
     }
 }

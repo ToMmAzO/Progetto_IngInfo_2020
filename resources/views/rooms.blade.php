@@ -13,60 +13,46 @@
 
     <div class="row">
         <div class="col-12">
-            <div class="card">
-                <div class="table-responsive">
-                    <table class="table mb-0">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Building</th>
-                            <th scope="col">Usage</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Area</th>
-                            <th scope="col">Volume</th>
-                            <th scope="col">Latitude</th>
-                            <th scope="col">Longitude</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td><i class="align-middle" data-feather="eye"></i></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td><i class="align-middle" data-feather="eye"></i></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td>Cell</td>
-                            <td><i class="align-middle" data-feather="eye"></i></td>
-                        </tr>
-                        </tbody>
-                    </table>
+            @if (count($rooms) === 0)
+                No rooms
+            @else
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table mb-0">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Building</th>
+                                <th scope="col">Usage</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">Area</th>
+                                <th scope="col">Volume</th>
+                                <th scope="col">Latitude</th>
+                                <th scope="col">Longitude</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($rooms as $r)
+                                <tr>
+                                    <th scope="row">{{$r -> room_id}}</th>
+                                    <td>{{$r -> building_id}}</td>
+                                    <td>{{$r -> intended_usage}}</td>
+                                    <td>{{$r -> location}}</td>
+                                    <td>{{$r -> area}}</td>
+                                    <td>{{$r -> volume}}</td>
+                                    <td>{{$r -> latitude}}</td>
+                                    <td>{{$r -> longitude}}</td>
+                                    <td><a href="{{ url('/room/' . $r -> room_id) }}"><i class="align-middle"
+                                                                                         data-feather="eye"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 @endsection
