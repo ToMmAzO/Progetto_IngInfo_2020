@@ -22,7 +22,7 @@
                                         @csrf
 
                                         <div class="form-group">
-                                            <label for="personcode">Email</label>
+                                            <label for="personcode">Person Code</label>
                                             <input
                                                 class="form-control form-control-lg @error('personcode') is-invalid @enderror"
                                                 id="personcode"

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use App\Room;
 
-class HomeController extends Controller
+class RoomsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,10 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $rooms = DB::table('users_room')
-            ->join('room', 'room.room_id', '=', 'users_room.room_id')
-            ->where('users_room.users_id', Auth::id())
-            ->get();
-        return view('home', ['rooms' => $rooms]);
+        $rooms = Room::all();
+        return view('rooms', ['rooms' => $rooms]);
     }
 }
