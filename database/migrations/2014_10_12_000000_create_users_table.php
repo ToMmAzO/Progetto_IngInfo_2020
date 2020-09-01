@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('name');
             $table->string('surname');
-            $table->timestamp('birthday');
+            $table->string('birthday');
             $table->string('email');
             //$table->timestamp('email_verified_at')->nullable();
 
@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             'password' => Hash::make('segretissima'),
             'name' => 'Marco',
             'surname' => 'Riva',
+            'birthday' => '1997',
             'email'=>'marco20.riva@mail.polimi.it'
         ]);
 
@@ -40,6 +41,7 @@ class CreateUsersTable extends Migration
             'password' => Hash::make('password'),
             'name' => 'Tommaso',
             'surname' => 'Pozzi',
+            'birthday' => '1998',
             'email'=>'tommaso4.pozzi@mail.polimi.it'
         ]);
     }

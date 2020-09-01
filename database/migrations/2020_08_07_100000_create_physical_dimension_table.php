@@ -18,10 +18,9 @@ class CreatePhysicalDimensionTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('unit_of_measure');
-            $table->double('accuracy');
-            $table->timestamp('response_time');
-            $table->double('value_op_max');
-            $table->double('value_op_min');
+            $table->unsignedBigInteger('sensor_id');
+
+            $table->foreign('sensor_id')->references('sensor_id')->on('sensor');
 
         });
     }

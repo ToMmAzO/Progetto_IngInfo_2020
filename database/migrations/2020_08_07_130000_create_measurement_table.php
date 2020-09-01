@@ -14,12 +14,12 @@ class CreateMeasurementTable extends Migration
     public function up()
     {
         Schema::create('measurement', function (Blueprint $table) {
-            $table->unsignedBigInteger('sensor_id');
             $table->timestamp('time');
-            $table->integer('value');
+            $table->double('value');
+            $table->unsignedBigInteger('physical_dimension_id');
 
-            $table->primary(['sensor_id', 'time']);
-            $table->foreign('sensor_id')->references('sensor_id')->on('sensor');
+            $table->primary(['physical_dimension_id', 'time']);
+            $table->foreign('physical_dimension_id')->references('physical_dimension_id')->on('physical_dimension');
         });
     }
 
