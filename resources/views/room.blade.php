@@ -8,6 +8,12 @@
             <div class="col-auto d-none d-sm-block">
                 <h3>Room <strong>{{$r -> room_id}}</strong></h3>
             </div>
+            <div class="col-auto ml-auto text-right mt-n1">
+                <a href="{{ url('/charts/' . $r -> room_id) }}">
+                    <button class="btn btn-primary btn-lg"><i data-feather="bar-chart-2"></i> Charts
+                    </button>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -87,16 +93,6 @@
                     <div>
                         <span class="text-muted">{{$r -> capacity}}</span>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="mb-3">Graphs</h4>
                 </div>
             </div>
         </div>

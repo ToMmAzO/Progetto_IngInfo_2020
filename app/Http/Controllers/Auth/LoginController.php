@@ -52,7 +52,7 @@ class LoginController extends Controller
             return redirect()->route('home');
         } else {
             return redirect()->route('login')
-                ->withErrors(['personcode' => 'The personcode is     not valid.']);
+                ->withErrors(['personcode' => 'The personcode is not valid.']);
         }
 
     }

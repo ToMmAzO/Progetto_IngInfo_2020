@@ -16,3 +16,10 @@ Route::get('/room/{id}', 'RoomController@index');
 Route::get('/room', function() {
     return redirect('/home');
 });
+
+Route::get('/charts/{id}', 'ChartsController@index');
+Route::get('/charts', function() {
+    return redirect('/home');
+});
+
+Route::get('/api/data/charts', 'ChartsDataController@index');
