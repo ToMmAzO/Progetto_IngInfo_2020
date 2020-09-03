@@ -1,6 +1,10 @@
+let myChart = null;
+
 window.onload = function () {
     initDatePicker();
+    initChart();
     getChartData();
+    bindChangeEvent();
 };
 
 function initDatePicker() {
@@ -19,18 +23,36 @@ function initDatePicker() {
     $("#enddate").on("change.datetimepicker", function (e) {
         $('#startdate').datetimepicker('maxDate', e.date);
     });
+}
 
-    getChartData();
-    bindChangeEvent();
+function initChart() {
+    let ctx = document.getElementById('chart').getContext('2d')
+    myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: "",
+                data: [],
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+                borderColor: 'rgba(231, 111, 81, 1)',
+                pointBackgroundColor: 'rgba(231, 111, 81, 1)'
+            }],
+        }
+    });
 }
 
 function bindChangeEvent() {
     $("#dimension").change(getChartData);
-    $("#start").change(getChartData);
-    $("#end").change(getChartData);
+    $("#startdate").on("change.datetimepicker", getChartData);
+    $("#enddate").on("change.datetimepicker", getChartData);
 }
 
 function getChartData() {
+    if (myChart == null) {
+        return;
+    }
+
     let dimension = $("#dimension").val();
     let start = $("#start").val();
     let end = $("#end").val();
@@ -58,27 +80,8 @@ function drawChart(data) {
         values.push(measurements[i]['value']);
     }
 
-    let ctx = document.getElementById('chart').getContext('2d');
-    let myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: data['unit'],
-                data: values,
-                backgroundColor: 'rgba(0, 0, 0, 0)',
-                borderColor: 'rgba(231, 111, 81, 1)',
-                pointBackgroundColor: 'rgba(231, 111, 81, 1)'
-            }],
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-
-                    }
-                }],
-            }
-        }
-    });
+    myChart.data.labels = labels;
+    myChart.data.datasets[0].label = data['unit'];
+    myChart.data.datasets[0].data = values;
+    myChart.update();
 }
