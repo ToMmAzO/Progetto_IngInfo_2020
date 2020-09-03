@@ -31,7 +31,13 @@ class ChartsController extends Controller
         $latestDateQuery = clone $measurementQuery;
 
         // Prendo la data più recente sottraggo 7 giorni per ottenere la data di inizio misurazioni
-        $endDate = date('d/m/Y', strtotime($latestDateQuery->latest('time')->first()->time));
+        $latestRow = $latestDateQuery->latest('time')->first();
+
+        if (!isset($latestRow)) {
+            return view('charts', ['r' => $room, 'error' => 'No data found!']);
+        }
+
+        $endDate = date('d/m/Y', strtotime($latestRow->time));
         $startDate = (DateTime::createFromFormat('d/m/Y', $endDate))->sub(new DateInterval('P7D'))
             ->format('d/m/Y');
 

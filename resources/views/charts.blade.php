@@ -22,43 +22,56 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="mb-3">Charts</h4>
-                    <form>
-                        <div class="row">
-                            <div class="col-md-4 form-group">
-                                <label for="dimension">Physical Dimension</label>
-                                <select class="form-control" name="dimension" id="dimension">
-                                    @foreach($dimensions as $d)
-                                        <option value="{{ $d->physical_dimension_id }}">{{ $d->description }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for="startdate">Start date</label>
-                                <div class="input-group date" id="startdate" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input"
-                                           data-target="#startdate" name="start" id="start"
-                                           value="{{$startDate}}"/>
-                                    <div class="input-group-append" data-target="#startdate"
-                                         data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 form-group">
-                                <label for="enddate">End date</label>
-                                <div class="input-group date" id="enddate" data-target-input="nearest">
-                                    <input type="text" class="form-control datetimepicker-input"
-                                           data-target="#enddate" name="end" id="end"
-                                           value="{{$endDate}}"/>
-                                    <div class="input-group-append" data-target="#enddate"
-                                         data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
+                    @isset($error)
+                        <div class="alert alert-danger" role="alert" id="erroralert">
+                            <div class="alert-message" id="alertmessage">
+                                {{ $error }}
                             </div>
                         </div>
-                    </form>
-                    <canvas id="chart"></canvas>
+                    @else
+                        <form>
+                            <div class="row">
+                                <div class="col-md-4 form-group">
+                                    <label for="dimension">Physical Dimension</label>
+                                    <select class="form-control" name="dimension" id="dimension">
+                                        @foreach($dimensions as $d)
+                                            <option
+                                                value="{{ $d->physical_dimension_id }}">{{ $d->description }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="startdate">Start date</label>
+                                    <div class="input-group date" id="startdate" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input"
+                                               data-target="#startdate" name="start" id="start"
+                                               value="{{$startDate}}"/>
+                                        <div class="input-group-append" data-target="#startdate"
+                                             data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label for="enddate">End date</label>
+                                    <div class="input-group date" id="enddate" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input"
+                                               data-target="#enddate" name="end" id="end"
+                                               value="{{$endDate}}"/>
+                                        <div class="input-group-append" data-target="#enddate"
+                                             data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="alert alert-danger" style="display: none" role="alert" id="erroralert">
+                            <div class="alert-message" id="alertmessage">
+                            </div>
+                        </div>
+                        <canvas id="chart" style="display: none"></canvas>
+                    @endisset
                 </div>
             </div>
         </div>

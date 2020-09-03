@@ -22,7 +22,7 @@ class ChartsDataController extends Controller
         $input = $request->all();
         $startDate = DateTime::createFromFormat('d/m/Y', $input['start']);
         $endDate = DateTime::createFromFormat('d/m/Y', $input['end']);
-        $dateDiff = $endDate->diff($startDate)->days;
+        $dateDiff = intval($startDate->diff($endDate)->format('%R%a'));
 
         if ($dateDiff < 0) {
             return response()->json(['error' => 'Invalid dates']);
@@ -34,6 +34,10 @@ class ChartsDataController extends Controller
             ->whereBetween('time', [$startDate->format('Y-m-d'), $endDate->format('Y-m-d')])
             ->groupBy('date')
             ->get();
+
+        if (count($measurements) == 0) {
+            return response()->json(['error' => 'No data found for this period!']);
+        }
 
         $unit = DB::table('physical_dimension')
             ->where('physical_dimension_id', $input['dimension'])

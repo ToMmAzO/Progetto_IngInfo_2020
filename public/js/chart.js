@@ -71,17 +71,30 @@ function getChartData() {
 }
 
 function drawChart(data) {
-    let measurements = data['measurements']
-    let labels = [];
-    let values = [];
+    let ctx = $('#chart');
+    let alert = $('#erroralert');
 
-    for (let i = 0; i < measurements.length; ++i) {
-        labels.push(measurements[i]['date']);
-        values.push(measurements[i]['value']);
+    if ('error' in data) {
+        ctx.hide();
+        alert.show();
+
+        $('#alertmessage').html('<strong>Error</strong> ' + data['error'])
+    } else {
+        ctx.show();
+        alert.hide();
+
+        let measurements = data['measurements']
+        let labels = [];
+        let values = [];
+
+        for (let i = 0; i < measurements.length; ++i) {
+            labels.push(measurements[i]['date']);
+            values.push(measurements[i]['value']);
+        }
+
+        myChart.data.labels = labels;
+        myChart.data.datasets[0].label = data['unit'];
+        myChart.data.datasets[0].data = values;
+        myChart.update();
     }
-
-    myChart.data.labels = labels;
-    myChart.data.datasets[0].label = data['unit'];
-    myChart.data.datasets[0].data = values;
-    myChart.update();
 }
