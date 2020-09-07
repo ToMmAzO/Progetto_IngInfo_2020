@@ -1,3 +1,4 @@
+const colors = ['#e76f51', '#f4a261', '#e9c46a', '#2a9d8f', '#264653']
 let myChart = null;
 
 window.onload = function () {
@@ -28,17 +29,7 @@ function initDatePicker() {
 function initChart() {
     let ctx = document.getElementById('chart').getContext('2d')
     myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: [],
-            datasets: [{
-                label: "",
-                data: [],
-                backgroundColor: 'rgba(0, 0, 0, 0)',
-                borderColor: 'rgba(231, 111, 81, 1)',
-                pointBackgroundColor: 'rgba(231, 111, 81, 1)'
-            }],
-        }
+        type: 'line'
     });
 }
 
@@ -53,9 +44,10 @@ function getChartData() {
         return;
     }
 
-    let dimension = $("#dimension").val();
-    let start = $("#start").val();
-    let end = $("#end").val();
+    let dimension = $('#dimension').val();
+    let room_id = $('#room-id').text();
+    let start = $('#start').val();
+    let end = $('#end').val();
 
     $.ajax({
         dataType: "json",
@@ -63,6 +55,7 @@ function getChartData() {
         url: "/api/data/charts",
         data: {
             dimension: dimension,
+            room: room_id,
             start: start,
             end: end
         },
@@ -84,17 +77,21 @@ function drawChart(data) {
         alert.hide();
 
         let measurements = data['measurements']
-        let labels = [];
-        let values = [];
 
-        for (let i = 0; i < measurements.length; ++i) {
-            labels.push(measurements[i]['date']);
-            values.push(measurements[i]['value']);
-        }
+        console.log(measurements)
 
-        myChart.data.labels = labels;
-        myChart.data.datasets[0].label = data['unit'];
-        myChart.data.datasets[0].data = values;
+        myChart.data.labels = data['labels'];
+        myChart.data.datasets = [];
+
+        measurements.forEach(function (measure, index) {
+            myChart.data.datasets.push({
+                label: measure['description'],
+                data: measure['data'],
+                borderColor: colors[index % colors.length],
+                backgroundColor: 'rgba(0,0,0,0)',
+            });
+        });
+
         myChart.update();
     }
 }

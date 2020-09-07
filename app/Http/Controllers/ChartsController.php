@@ -41,17 +41,18 @@ class ChartsController extends Controller
         $startDate = (DateTime::createFromFormat('d/m/Y', $endDate))->sub(new DateInterval('P7D'))
             ->format('d/m/Y');
 
-        // Prendo gli ID delle dimensioni misurate in questo arco temporale
-        $dimensions_id = $measurementQuery
-            ->select('physical_dimension.physical_dimension_id')
-            ->groupBy('physical_dimension.physical_dimension_id')
-            ->pluck('physical_dimension.physical_dimension_id')
-            ->toArray();
-
-        // Prendo tutte le informazioni riguardo le dimensioni fisiche misurate
-        $dimensions = DB::table('physical_dimension')
-            ->whereIn('physical_dimension_id', $dimensions_id)
+        // Prendo le dimensioni misurate in questo arco temporale
+        $dimensionsData = $measurementQuery
+            ->select('name', 'unit_of_measure')
+            ->distinct()
             ->get();
+
+        $dimensions = array();
+        foreach ($dimensionsData as $d) {
+            array_push($dimensions, array(
+                "name" => $d->name,
+                "unit" => $d->unit_of_measure));
+        }
 
         return view('charts', ['r' => $room, 'endDate' => $endDate, 'startDate' => $startDate,
             'dimensions' => $dimensions]);

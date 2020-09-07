@@ -6,7 +6,7 @@
     <div class="container-fluid p-0">
         <div class="row mb-2 mb-xl-3">
             <div class="col-auto d-none d-sm-block">
-                <h3>Room <strong>{{$r -> room_id}}</strong></h3>
+                <h3>Room <span id="room-id"><strong>{{$r -> room_id}}</strong></span></h3>
             </div>
             <div class="col-auto ml-auto text-right mt-n1">
                 <a href="{{ url('/room/' . $r -> room_id) }}">
@@ -36,7 +36,7 @@
                                     <select class="form-control" name="dimension" id="dimension">
                                         @foreach($dimensions as $d)
                                             <option
-                                                value="{{ $d->physical_dimension_id }}">{{ $d->description }}</option>
+                                                value="{{ $d['name'] }}">{{ $d['name'] }} [{{ $d['unit']  }}]</option>
                                         @endforeach
                                     </select>
                                 </div>
