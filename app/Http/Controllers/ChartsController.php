@@ -47,14 +47,27 @@ class ChartsController extends Controller
             ->distinct()
             ->get();
 
+        if ($dimensionsData->contains('name', 'Temperatura') && $dimensionsData->contains('name', 'Umidità')) {
+            $dimensionsData = $dimensionsData->whereNotIn('name', ['Temperatura', 'Umidità']);
+
+            $dimensions = $this->to_array_list($dimensionsData);
+            array_unshift($dimensions, array('name' => 'Temperatura e Umidità', 'unit' => '*C e %'));
+        } else {
+            $dimensions = $this->to_array_list($dimensionsData);
+        }
+
+        return view('charts', ['r' => $room, 'endDate' => $endDate, 'startDate' => $startDate,
+            'dimensions' => $dimensions]);
+    }
+
+    function to_array_list($data) {
         $dimensions = array();
-        foreach ($dimensionsData as $d) {
+        foreach ($data as $d) {
             array_push($dimensions, array(
                 "name" => $d->name,
                 "unit" => $d->unit_of_measure));
         }
 
-        return view('charts', ['r' => $room, 'endDate' => $endDate, 'startDate' => $startDate,
-            'dimensions' => $dimensions]);
+        return $dimensions;
     }
 }
