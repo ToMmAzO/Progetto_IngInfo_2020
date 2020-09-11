@@ -78,14 +78,14 @@ function drawChart(data) {
         if (data['chart'] === 'multi') {
             updateChartType('line');
             setMultiAxes();
-            setData(measurements, true);
+            setData(measurements, 'multi');
         } else if (data['chart'] === 'stacked') {
             updateChartType('bar');
             setStacked();
-            setData(measurements, false);
+            setData(measurements, 'stacked');
         } else {
             updateChartType('line');
-            setData(measurements, false);
+            setData(measurements, 'line');
         }
 
         myChart.data.labels = data['labels'];
@@ -126,8 +126,8 @@ function drawChart(data) {
         }
     }
 
-    function setData(measurements, multi) {
-        if (multi) {
+    function setData(measurements, type) {
+        if (type === 'multi' ) {
             myChart.data.datasets = [{
                 label: measurements[0]['description'],
                 yAxisID: 'A',
@@ -141,12 +141,21 @@ function drawChart(data) {
                 backgroundColor: 'rgba(0,0,0,0)',
                 data: measurements[1]['data']
             }];
-        } else {
+        } else if (type === 'stacked') {
             measurements.forEach(function (measure, index) {
                 myChart.data.datasets.push({
                     label: measure['description'],
                     data: measure['data'],
                     backgroundColor: colors[index % colors.length]
+                });
+            });
+        } else {
+            measurements.forEach(function (measure, index) {
+                myChart.data.datasets.push({
+                    label: measure['description'],
+                    data: measure['data'],
+                    borderColor: colors[index % colors.length],
+                    backgroundColor: "rgba(0,0,0,0)"
                 });
             });
         }
