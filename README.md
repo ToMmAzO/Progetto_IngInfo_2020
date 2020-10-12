@@ -8,7 +8,7 @@ Web, multimedia e database
 ### DESCRIZIONE
 Il progetto ha l’obiettivo di migliorare la percezione e consapevolezza dell’utente relativa ai consumi energetici e al comfort degli ambienti in cui vive/passa il suo tempo.
 
-Si dispone di sensori che collezionano i dati relativi alle condizioni ambientali (temperatura, umidità, luminosità) e ai consumi (alimentazione di dispositivi, luci, condizionamento/riscaldamento) e si vuole realizzare interfacce web e per dispositivi mobili che consentano di visualizzare in modo immediato le condizioni dello spazio occupato, il comfort percepito dall’utente, e i consumi effettuati.
+Si dispone di sensori che collezionano i [dati](https://github.com/ToMmAzO/Progetto_IngInfo_2020/blob/master/Progetto.sql) relativi alle condizioni ambientali (temperatura, umidità, luminosità) e ai consumi (alimentazione di dispositivi, luci, condizionamento/riscaldamento) e si vuole realizzare interfacce web e per dispositivi mobili che consentano di visualizzare in modo immediato le condizioni dello spazio occupato, il comfort percepito dall’utente, e i consumi effettuati.
 
 ## Sviluppatori
 - __[Tommaso Pozzi](https://github.com/ToMmAzO)__
